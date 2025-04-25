@@ -17,7 +17,7 @@ LIBS = $(MLX42_PATH)/build/libmlx42.a $(LIBFT_PATH)/libft.a -ldl -lglfw -pthread
 SRCS =
 OBJS = $(SRCS:.c=.o)
 
-all: mlx42 libft #$(NAME)
+all: mlx42 libft $(NAME)
 
 mlx42: $(MLX42_PATH)/build/libmlx42.a
 
