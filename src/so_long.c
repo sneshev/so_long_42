@@ -1,8 +1,47 @@
-#include "so_long.h"
+#include "../so_long.h"
 
 
-
-int main()
+int find(char *attrib, char *map)
 {
-    
+	int count;
+
+	count = 1;
+	if (ft_strncmp(attrib, "width", 5) == 0)
+	{
+		while (map[count] && map[count] != '\n')
+			count++;
+		return (count);
+	}
+	else if (ft_strncmp(attrib, "height", 6) == 0)
+	{
+		while(*(map++))
+		{
+			if (*map == '\n')
+				count++;
+		}
+		return (count);
+	}
+	else { printf("wtffff broo...") ;}
+	return (1);
+}
+
+// void game()
+// {
+// 	mlx_t *mlx;
+
+// 	if (!(mlx = mlx_init(find("width", argv[1]), find("height", argv[1]), "idk", false)))
+// 	{
+// 		puts();
+// 		return (1);
+// 	}
+
+// }
+
+int main(int argc, char *argv[])
+{
+	printf("width: %d \nheight: %d\n", find(argv[1], "width"), find(argv[1], "width"));
+	if (argc != 2)
+	{
+		return (printf("🚫INVALID ARG AMOUNT🚫"), 1);
+	}
 }
