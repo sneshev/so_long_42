@@ -24,5 +24,13 @@ typedef struct s_map
 void print_map(char **map);
 
 
+//utils
+void free_arr(char **arr);
+
+
+//map
+char **getmap(char *name);
+
+
 
 #endif
