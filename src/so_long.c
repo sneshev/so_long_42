@@ -1,47 +1,86 @@
-#include "../so_long.h"
+#include "so_long.h"
 
-
-int find(char *attrib, char *map)
+int is_valid_name(char *name)
 {
-	int count;
-
-	count = 1;
-	if (ft_strncmp(attrib, "width", 5) == 0)
-	{
-		while (map[count] && map[count] != '\n')
-			count++;
-		return (count);
-	}
-	else if (ft_strncmp(attrib, "height", 6) == 0)
-	{
-		while(*(map++))
-		{
-			if (*map == '\n')
-				count++;
-		}
-		return (count);
-	}
-	else { printf("wtffff broo...") ;}
-	return (1);
+	if (!name)
+		return 0;
+	return 1;	
 }
 
-// void game()
-// {
-// 	mlx_t *mlx;
-
-// 	if (!(mlx = mlx_init(find("width", argv[1]), find("height", argv[1]), "idk", false)))
-// 	{
-// 		puts();
-// 		return (1);
-// 	}
-
-// }
-
-int main(int argc, char *argv[])
+char *find_map(char *name, int free_flag)
 {
-	printf("width: %d \nheight: %d\n", find(argv[1], "width"), find(argv[1], "width"));
-	if (argc != 2)
+	char *dot;
+	char *temp;
+
+	dot = strrchr(name, '.');
+	if (!dot || strncmp(dot, ".ber", 5))
 	{
-		return (printf("🚫INVALID ARG AMOUNT🚫"), 1);
+		temp = ft_strjoin(name, ".ber");
+		if (!temp)
+			return (NULL);
+		return (find_map(temp, 1));
 	}
+	temp = ft_strjoin("maps/", name);
+	if (!temp)
+		return (NULL);
+	if (free_flag)
+		free(name);
+	return (temp);
+}
+
+char **getmap(char *name)
+{
+	int fd;
+	char *red;
+	char *temp = NULL;
+	char **map;
+
+	if (!is_valid_name(name))
+		return (NULL);
+	temp = find_map(name, 0);
+	fd = open(temp, O_RDONLY);
+	free(temp);
+	temp = NULL;
+	if (fd == -1)
+		return (NULL);
+
+	red = get_next_line(fd);
+	while (red)
+	{
+		temp = add_to_line(&temp, &red);
+		red = get_next_line(fd);
+	}
+	map = ft_split(temp, '\n');
+	return (free(temp), map);
+}
+
+void free_arr(char **arr)
+{
+	int i;
+
+	if (!arr)
+		return ;
+	i = 0;
+	while(arr[i])
+	{
+		free (arr[i]);
+		i++;
+	}
+	free(arr);
+}
+
+int main()
+{
+	int argc = 2;
+	char *argv[2] = {"./so_long", "base"};
+	char **map;
+
+	if (argc != 2)
+		return (printf("add good args"), -1);
+	map = getmap(argv[1]);
+	if (map == NULL)
+		return (printf("invalid map name"), -1);
+	
+	print_map(map);
+	free_arr(map);
 }

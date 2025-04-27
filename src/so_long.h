@@ -4,7 +4,12 @@
 # include <stdint.h>
 # include <stdbool.h>
 # include <unistd.h>
+# include <stdlib.h>
 # include <stdio.h>
+# include <fcntl.h>
+# include "get_next_line.h"
+# include "../libft/libft.h"
+# include "../MLX42/include/MLX42/MLX42.h"
 
 typedef struct s_map
 {
@@ -13,13 +18,11 @@ typedef struct s_map
     int     height;
 }   t_map;
 
-// Load map from file
-bool load_map(const char *path, t_map *map);
 
-// Free memory
-void free_map(t_map *map);
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n);
+//helpers
+void print_map(char **map);
+
 
 
 #endif

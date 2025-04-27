@@ -1,0 +1,19 @@
+invalid 1:  complicated unsolvable
+invalid 2:  empty
+invalid 3:  invalid object (letter)
+invalid 4:  invalid object (number)
+invalid 5:  many exit 
+invalid 6:  many player
+invalid 7:  neither reachable
+invalid 8:  no collectable
+invalid 9:  no exit
+invalid 10: no horizontal wall
+invalid 11: no player
+invalid 12: nothing walkable
+invalid 13: not rectangular
+invalid 14: not rectangular vertical
+invalid 15: no vertical wall
+invalid 16: no walls
+invalid 17: unsolvable collectible
+invalid 18: unsolvable exit
+invalid 19: new line at the end

@@ -1,6 +1,6 @@
 NAME = so_long
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 
 # Library paths
 MLX42_PATH = ./MLX42
@@ -14,7 +14,7 @@ LIBFT_REPO = git@vogsphere-v2.codam.nl:vogsphere/intra-uuid-f826522b-c274-4e1a-b
 HEADERS = -I$(MLX42_PATH)/include -I$(LIBFT_PATH)
 LIBS = $(MLX42_PATH)/build/libmlx42.a $(LIBFT_PATH)/libft.a -ldl -lglfw -pthread -lm
 
-SRCS =
+SRCS = $(wildcard src/*.c)
 OBJS = $(SRCS:.c=.o)
 
 all: mlx42 libft $(NAME)
