@@ -15,7 +15,8 @@ HEADERS = -I$(MLX42_PATH)/include -I$(LIBFT_PATH)
 LIBS = $(MLX42_PATH)/build/libmlx42.a $(LIBFT_PATH)/libft.a -ldl -lglfw -pthread -lm
 
 SRCS = $(wildcard src/*.c)
-OBJS = $(SRCS:.c=.o)
+OBJS_DIR = obj
+OBJS = $(SRCS:src/%.c=$(OBJS_DIR)/%.o)
 
 all: mlx42 libft $(NAME)
 
@@ -41,13 +42,15 @@ $(LIBFT_PATH)/libft.a:
 $(NAME): $(OBJS)
 	$(CC) $(OBJS) $(LIBS) -o $(NAME)
 
-%.o: %.c
+$(OBJS_DIR)/%.o: src/%.c
+	@mkdir -p $(OBJS_DIR)
 	$(CC) $(CFLAGS) $(HEADERS) -c $< -o $@
 
 clean:
 	@make -C $(LIBFT_PATH) clean
 	@rm -f $(OBJS)
 	@rm -rf $(MLX42_PATH)/build
+	@rm -rf $(OBJS_DIR)
 
 fclean: clean
 	@make -C $(LIBFT_PATH) fclean
