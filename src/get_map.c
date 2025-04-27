@@ -21,26 +21,24 @@ char *find_map(char *name, int free_flag)
 	return (temp);
 }
 
-char **getmap(char *name)
+char *getmap(char *name)
 {
 	int fd;
 	char *red;
-	char *temp = NULL;
-	char **map;
+	char *map = NULL;
 
-	temp = find_map(name, 0);
-	fd = open(temp, O_RDONLY);
-	free(temp);
-	temp = NULL;
+	map = find_map(name, 0);
+	fd = open(map, O_RDONLY);
+	free(map);
+	map = NULL;
 	if (fd == -1)
 		return (NULL);
 
 	red = get_next_line(fd);
 	while (red)
 	{
-		temp = add_to_line(&temp, &red);
+		map = add_to_line(&map, &red);
 		red = get_next_line(fd);
 	}
-	map = ft_split(temp, '\n');
-	return (free(temp), map);
+	return (map);
 }

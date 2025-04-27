@@ -14,3 +14,27 @@ void free_arr(char **arr)
 	}
 	free(arr);
 }
+
+int find(int attrib, char *map)
+{
+	int count;
+
+	count = 1;
+	if (attrib == WIDTH)
+	{
+		while (map[count] && map[count] != '\n')
+			count++;
+		return (count);
+	}
+	else if (attrib == HEIGHT)
+	{
+		while(*(map++))
+		{
+			if (*map == '\n')
+				count++;
+		}
+		return (count);
+	}
+	else { printf("wtffff broo...") ;}
+	return (1);
+}

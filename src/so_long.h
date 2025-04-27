@@ -1,6 +1,9 @@
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
+# define WIDTH 0
+# define HEIGHT 1
+
 # include <stdint.h>
 # include <stdbool.h>
 # include <unistd.h>
@@ -21,15 +24,18 @@ typedef struct s_map
 
 
 //helpers
-void print_map(char **map);
+void print_map(char *map);
+void print_map2(char **map);
 
 
 //utils
 void free_arr(char **arr);
+int find(int attrib, char *map);
 
 
 //map
-char **getmap(char *name);
+char *getmap(char *name);
+bool is_valid(char *map);
 
 
 

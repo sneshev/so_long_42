@@ -1,0 +1,105 @@
+#include "so_long.h"
+
+int count(char *map, char c)
+{
+	int count;
+	int i;
+
+	i = 0;
+	count = 0;
+	while (map[i])
+	{
+		if (map[i] == c)
+			count++;
+		i++;;
+	}
+	return (count);
+}
+
+bool only_valid(char *map)
+{
+	int i;
+
+	i = 0;
+	while (map[i])
+	{
+		if (map[i] != '0' && map[i] != '1' &&
+			map[i] != 'P' && map[i] != 'C' &&
+			map[i] != 'E' && map[i] != '\n')
+			return (false);
+		i++;
+	}
+	return (true);
+}
+
+bool check_wall_edge(char *map_line, int width)
+{
+	int j;
+
+	j = 0;
+	while (j < width)
+	{
+		if (map_line[j] != '1')
+			return (false);
+		j++;
+	}
+	return (true);
+}
+
+bool map_edges(char **map, int width, int height)
+{
+	int i;
+
+	i = 0;
+
+	if (!check_wall_edge(map[0], width))
+		return (false);
+	while (i++ < height - 1)
+	{
+		if (map[i][0] != '1')
+			return (false);
+		if (map[i][width - 1] != '1')
+			return (false);
+	}
+	if (!check_wall_edge(map[height - 1], width))
+		return (false);
+	return (true);
+}
+
+bool is_rectangular(char *map)
+{
+	int i;
+
+	while(map[i])
+	{
+		i = 0;
+		while (map[i] && map[i] != '\n')
+			i++;
+		if (WIDTH != i)
+			return (false);
+	}
+	return (true);
+}
+
+bool is_valid(char *map)
+{
+	char **marrp;
+
+	if (!only_valid(map)) //check for invalid characters
+		return (false);
+	if (count(map, 'P') != 1 || 	//count players
+		count(map, 'E') != 1 ||		//count exits
+		count(map, 'C') < 1)		//count collectables
+		return (false);
+	if (!is_rectangular(map))
+		return (false);
+
+	marrp = ft_split(map, '\n');
+	if (!map_edges(marrp, find(WIDTH, map), find(HEIGHT, map))) //check sides (ceiling, floor, left and right)
+		return (false);
+	//validate exit access
+	//validate collectables access
+	//validate collectables access
+	//validate walking area
+	return (free_arr(marrp), true);
+}
