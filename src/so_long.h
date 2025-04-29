@@ -3,6 +3,7 @@
 
 # define WIDTH 0
 # define HEIGHT 1
+# define TILE_SIZE 8
 
 # define WALL '1'
 # define EMPTY '0'

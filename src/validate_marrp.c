@@ -65,14 +65,14 @@ bool	check_for_stuck(char **map)
 	return (false);
 }
 
-bool is_playable(char **map) //validate walking area, exit, and collectables access
+//validate walking area, exit, and collectables access
+bool is_playable(char **map)
 {
 	int start_x;
 	int start_y;
 
 	find_start(&start_x, &start_y, map);
 	flood_fill(start_x, start_y, map);
-	print_map2(map);
 	if (check_for_stuck(map))
 		return (false);
 	return (true);

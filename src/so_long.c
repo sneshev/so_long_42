@@ -5,7 +5,7 @@
 // void start_game(char *map)
 // {
 // 	mlx_t *mlx;
-// 	if (!(mlx = mlx_init(find("width", map), find("height", map), "idk", false)))
+	// if (!(mlx = mlx_init(find("width", map), find("height", map), "idk", false)))
 // 	{
 // 		// puts();
 // 		return (1);
