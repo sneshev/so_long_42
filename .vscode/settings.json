@@ -2,6 +2,8 @@
 	"files.associations": {
 		"fcntl.h": "c",
 		"so_long.h": "c",
-		"stdio.h": "c"
+		"stdio.h": "c",
+		"get_next_line.h": "c",
+		"typeinfo": "c"
 	}
 }
