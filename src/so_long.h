@@ -4,6 +4,13 @@
 # define WIDTH 0
 # define HEIGHT 1
 
+# define WALL '1'
+# define EMPTY '0'
+# define PLAYER 'P'
+# define EXIT 'E'
+# define COLLECTIBLE 'C'
+# define REACHABLE 'X'
+
 # include <stdint.h>
 # include <stdbool.h>
 # include <unistd.h>
@@ -36,6 +43,7 @@ int find(int attrib, char *map);
 //map
 char *getmap(char *name);
 bool is_valid(char *map);
+bool is_playable(char **map);
 
 
 

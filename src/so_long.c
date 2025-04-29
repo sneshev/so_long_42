@@ -16,7 +16,7 @@
 int main()
 {
 	int argc = 2;
-	char *argv[2] = {"./so_long", "test.ber"};
+	char *argv[2] = {"./so_long", "invalid19.ber"};
 	char *map;
 
 	if (argc != 2)

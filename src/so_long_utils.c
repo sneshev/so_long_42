@@ -30,7 +30,7 @@ int find(int attrib, char *map)
 	{
 		while(*(map++))
 		{
-			if (*map == '\n')
+			if (*map == '\n' && *(map + 1) && *(map + 1) != '\n')
 				count++;
 		}
 		return (count);

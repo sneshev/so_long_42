@@ -29,6 +29,8 @@ bool only_valid(char *map)
 			return (false);
 		i++;
 	}
+	if (map[i - 1] == '\n')
+		return (false);
 	return (true);
 }
 
@@ -97,9 +99,7 @@ bool is_valid(char *map)
 	marrp = ft_split(map, '\n');
 	if (!map_edges(marrp, find(WIDTH, map), find(HEIGHT, map))) //check sides (ceiling, floor, left and right)
 		return (false);
-	//validate exit access
-	//validate collectables access
-	//validate collectables access
-	//validate walking area
+	if (!is_playable(marrp))
+		return (false);
 	return (free_arr(marrp), true);
 }
