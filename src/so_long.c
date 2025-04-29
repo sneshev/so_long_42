@@ -13,10 +13,10 @@
 // }
 
 
-int main()
+int main(int argc, char *argv[])
 {
-	int argc = 2;
-	char *argv[2] = {"./so_long", "invalid19.ber"};
+	// int argc = 2;
+	// char *argv[2] = {"./so_long", "invalid19.ber"};
 	char *map;
 
 	if (argc != 2)

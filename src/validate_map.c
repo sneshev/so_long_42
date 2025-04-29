@@ -98,8 +98,8 @@ bool is_valid(char *map)
 
 	marrp = ft_split(map, '\n');
 	if (!map_edges(marrp, find(WIDTH, map), find(HEIGHT, map))) //check sides (ceiling, floor, left and right)
-		return (false);
+		return (free_arr(marrp), false);
 	if (!is_playable(marrp))
-		return (false);
+		return (free_arr(marrp), false);
 	return (free_arr(marrp), true);
 }
