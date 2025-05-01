@@ -60,9 +60,9 @@ bool        is_playable(char **map);
 void        find_start(int *start_x, int *start_y, char **map);
 
 //game
-void    start_game(char *map);
-t_game *setup_game(char *map_raw);
-t_player *setup_player(char **map, mlx_t *mlx);
+void        start_game(char *map_raw);
+t_game      *setup_game(char *map_raw);
+t_player    *setup_player(char **map, mlx_t *mlx);
 
 
 
