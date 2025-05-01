@@ -48,40 +48,41 @@ int move(t_game *game, t_player *player, int new_y, int new_x)
     map[new_y][new_x] = 'P';
     find_start(&player->y, &player->x, map);
     player->moves++;
-    render_map(map);
-
+    render_map(game->mlx, game->map);
+    return 1;
 }
 
-int mlx_key_hook(void *win, int (*funct_ptr)(int, void *), void *param);
-int sethooks(int code, void *param)
+// int mlx_key_hook(void *win, int (*funct_ptr)(int, void *), void *param);
+void *sethooks(struct mlx_key_data code, void *param)
 {
     t_data *data;
+    t_player *player;
 
     data = (t_data *)param;
+    player = data->player;
     if (code == 53)
     {
-        mlx_loop_end(data->mlx);
+        // mlx_loop_end();
     }
     if (code == 123 || code == 0) //left
     {
-        move(data->game, data->player, player->y, player->x - 1);
+        move(data->game, player, player->y, player->x - 1);
     }
     if (code == 124 || code == 2) //right
     {
-        move(data->game, data->player, player->y, player->x + 1);
+        move(data->game, player, player->y, player->x + 1);
 
     }
     if (code == 125 || code == 1) //down
     {
-        move(data->game, data->player, player->y - 1, player->x);
+        move(data->game, player, player->y - 1, player->x);
 
     }
     if (code == 126 || code == 13) //up
     {
-        move(data->game, data->player, player->y + 1, player->x);
+        move(data->game, player, player->y + 1, player->x);
 
     }
-
 }
 
 void start_game(char *map_raw)
@@ -97,7 +98,7 @@ void start_game(char *map_raw)
 		return ;
 	}
 
-	game = setup_game(map_raw);
+	game = setup_game(map_raw, mlx);
 	if (!game)
 		return ;
 	player = setup_player(game->map, mlx);
@@ -107,12 +108,12 @@ void start_game(char *map_raw)
 	if (!data) //still need to free prev.
 		return ;
 
-    void *input_window = mlx_new_window(mlx, 800, 600, "Key Hook Example");
-    mlx_key_hook(input_window, sethooks, data);
+    // int input_window = mlx_new_window(mlx, 800, 600, "Key Hook Example");
+    mlx_key_hook(mlx, sethooks, data);
 
 	render_map(mlx, game->map);
 	mlx_loop(mlx);
-
 	cleanup(game, player, mlx);
 	return ;
 }
+

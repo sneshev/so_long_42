@@ -22,20 +22,16 @@
 # include "../libft/libft.h"
 # include "../MLX42/include/MLX42/MLX42.h"
 
-typedef struct s_data
-{
-    t_game *game;
-    t_player *player;
-    mlx_t *mlx;
-}   t_data;
+
 
 typedef struct s_game
 {
     mlx_image_t *emptyimg;
-    char    **map;
-    int     width;
-    int     height;
-    int     points;
+    mlx_t       *mlx;
+    char        **map;
+    int         width;
+    int         height;
+    int         points;
 }   t_game;
 
 typedef struct s_player
@@ -48,6 +44,13 @@ typedef struct s_player
 
 }   t_player;
 
+
+typedef struct s_data
+{
+    t_game *game;
+    t_player *player;
+    mlx_t *mlx;
+}   t_data;
 
 //helpers
 void        print_map(char *map);
@@ -71,7 +74,8 @@ void        find_start(int *start_x, int *start_y, char **map);
 
 //game
 void        start_game(char *map_raw);
-t_game      *setup_game(char *map_raw);
+t_data      *setup_data(t_game *game, t_player *player, mlx_t *mlx);
+t_game      *setup_game(char *map_raw, mlx_t *mlx);
 t_player    *setup_player(char **map, mlx_t *mlx);
 
 

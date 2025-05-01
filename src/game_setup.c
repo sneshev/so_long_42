@@ -1,7 +1,7 @@
 #include "so_long.h"
 #include <stdlib.h>  // for malloc()
 
-t_data *setup_data(t_game *game, t_player *player, mlx_t mlx)
+t_data *setup_data(t_game *game, t_player *player, mlx_t *mlx)
 {
     t_data *data;
 
@@ -15,7 +15,7 @@ t_data *setup_data(t_game *game, t_player *player, mlx_t mlx)
     return (data);
 }
 
-t_game *setup_game(char *map_raw)
+t_game *setup_game(char *map_raw, mlx_t *mlx)
 {
 	t_game	*game;
 
@@ -32,6 +32,7 @@ t_game *setup_game(char *map_raw)
 	game->width = find(WIDTH, map_raw);
 	game->height= find(HEIGHT, map_raw);
 	game->points = count(map_raw, 'C');
+    game->mlx = mlx;
     game->emptyimg = get_image(EMPTY, mlx);
     return (game);
 }
