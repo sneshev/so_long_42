@@ -22,29 +22,47 @@
 # include "../libft/libft.h"
 # include "../MLX42/include/MLX42/MLX42.h"
 
-typedef struct s_map
+typedef struct s_game
 {
-    char    **tiles;  // 2D array of chars
+    char    **map;
     int     width;
     int     height;
-}   t_map;
+    int     points;
+}   t_game;
 
+typedef struct s_player
+{
+    mlx_image_t *img;
+    int points;
+    int x;
+    int y;
+}   t_player;
 
 
 //helpers
-void print_map(char *map);
-void print_map2(char **map);
+void        print_map(char *map);
+void        print_map2(char **map);
 
 
 //utils
-void free_arr(char **arr);
-int find(int attrib, char *map);
+void        free_arr(char **arr);
+void        cleanup(t_game *game, t_player *player, mlx_t *mlx);
+int         find(int attrib, char *map);
+int         count(char *map, char c);
+
+mlx_image_t *get_image(int type, mlx_t *mlx);
 
 
 //map
-char *getmap(char *name);
-bool is_valid(char *map);
-bool is_playable(char **map);
+char        *getmap(char *name);
+bool        is_valid(char *map);
+bool        is_playable(char **map);
+void        find_start(int *start_x, int *start_y, char **map);
+
+//game
+void    start_game(char *map);
+t_game *setup_game(char *map_raw);
+t_player *setup_player(char **map, mlx_t *mlx);
 
 
 

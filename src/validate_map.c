@@ -1,21 +1,5 @@
 #include "so_long.h"
 
-int count(char *map, char c)
-{
-	int count;
-	int i;
-
-	i = 0;
-	count = 0;
-	while (map[i])
-	{
-		if (map[i] == c)
-			count++;
-		i++;;
-	}
-	return (count);
-}
-
 bool only_valid(char *map)
 {
 	int i;
@@ -71,14 +55,24 @@ bool map_edges(char **map, int width, int height)
 bool is_rectangular(char *map)
 {
 	int i;
+	int x;
+	int count = 0;
 
-	while(map[i])
+	i = 0;
+	x = 0;
+	while(i <= find(HEIGHT, map))
 	{
-		i = 0;
+		x = 0;
+		count++;
 		while (map[i] && map[i] != '\n')
+		{
 			i++;
-		if (WIDTH != i)
+			x++;
+			printf("map[i] = %c\n", map[i]);
+		}
+		if (find(WIDTH, map) != x)
 			return (false);
+		i++;
 	}
 	return (true);
 }

@@ -1,58 +1,63 @@
 #include "so_long.h"
 
-mlx_image_t *get_image(int type, mlx_t *mlx)
+void render_map(mlx_t *mlx, char **map)
 {
-	mlx_texture_t* wall_tex;
-	mlx_texture_t* floor_tex;
-	mlx_texture_t* player_tex;
-	mlx_texture_t* exit_tex;
-	mlx_texture_t* collect_tex;
+    for (int y = 0; map[y]; y++)
+    {
+        for (int x = 0; map[y][x]; x++)
+        {
+            // Always draw floor first
+            mlx_image_to_window(mlx, get_image(EMPTY, mlx), x * TILE_SIZE, y * TILE_SIZE);
 
-	wall_tex = mlx_load_png("assets/wall.png");
-	floor_tex = mlx_load_png("assets/floor.png");
-	player_tex = mlx_load_png("assets/player.png");
-	exit_tex = mlx_load_png("assets/exit.png");
-	collect_tex = mlx_load_png("assets/collectible.png");
-	if (type == WALL)
-		return (mlx_texture_to_image(mlx, wall_tex));
-	if (type == PLAYER)
-		return (mlx_texture_to_image(mlx, player_tex));
-	if (type == COLLECTIBLE)
-		return (mlx_texture_to_image(mlx, collect_tex));
-	if (type == EXIT)
-		return (mlx_texture_to_image(mlx, exit_tex));
-	if (type == EMPTY)
-		return (mlx_texture_to_image(mlx, floor_tex));
-	return (NULL);		
+            if (map[y][x] == '1')
+                mlx_image_to_window(mlx, get_image(WALL, mlx), x * TILE_SIZE, y * TILE_SIZE);
+            else if (map[y][x] == 'P')
+                mlx_image_to_window(mlx, get_image(PLAYER, mlx), x * TILE_SIZE, y * TILE_SIZE);
+            else if (map[y][x] == 'E')
+                mlx_image_to_window(mlx, get_image(EXIT, mlx), x * TILE_SIZE, y * TILE_SIZE);
+            else if (map[y][x] == 'C')
+                mlx_image_to_window(mlx, get_image(COLLECTIBLE, mlx), x * TILE_SIZE, y * TILE_SIZE);
+        }
+    }
 }
 
-void start_game(char *map)
+
+
+void start_game(char *map_raw)
 {
 	mlx_t *mlx;
-	int width;
-	int height;
+	t_game *game;
+	t_player *player;
+	(void)game;
+	(void)player;
 
-	width = find(WIDTH, map) * TILE_SIZE;
-	height = find(HEIGHT, map) * TILE_SIZE;
-	if (!(mlx = mlx_init(width, height, "i love mitaniiiiiiiiiiiiiiiii", false)))
+	printf("width: %d, height: %d\n", find(WIDTH, map_raw), find(HEIGHT, map_raw));
+	if (!(mlx = mlx_init(find(WIDTH, map_raw), find(HEIGHT, map_raw), "i love mitaniiiiiiiiiiiiiiiii", false)))
 	{
 		// puts();
 		return ;
 	}
 
-    // Start the rendering loop
-    mlx_loop(mlx);
+	game = setup_game(map_raw);
+	if (!game)
+		return ;
+	player = setup_player(game->map, mlx);
+	if (!player)
+		return ;
 
-    // Clean up when the window closes
-    mlx_terminate(mlx);
-    return ;
+	render_map(mlx, game->map);
+	mlx_loop(mlx);
+
+	cleanup(game, player, mlx);
+	return ;
 }
+
 
 
 int main(int argc, char *argv[])
 {
 	// int argc = 2;
-	// char *argv[2] = {"./so_long", "invalid19.ber"};
+	// char *argv[2] = {"./so_long", "heart.ber"};
 	char *map;
 
 	if (argc != 2)
@@ -67,8 +72,10 @@ int main(int argc, char *argv[])
 		return (free(map), printf("invalid map"), -1);
 	
 	printf("mapp good :)");
-	
+
+
 	start_game(map);
 
+	//free the t_game and its contents
 	free(map);
 }

@@ -5,8 +5,8 @@ char *find_map(char *name, int free_flag)
 	char *dot;
 	char *temp;
 
-	dot = strrchr(name, '.');
-	if (!dot || strncmp(dot, ".ber", 5))
+	dot = ft_strrchr(name, '.');
+	if (!dot || ft_strncmp(dot, ".ber", 5))
 	{
 		temp = ft_strjoin(name, ".ber");
 		if (!temp)

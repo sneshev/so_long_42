@@ -15,6 +15,27 @@ void free_arr(char **arr)
 	free(arr);
 }
 
+void cleanup(t_game *game, t_player *player, mlx_t *mlx)
+{
+	if (game)
+	{
+		if (game->map)
+			free_arr(game->map);  // properly frees char **map
+		free(game);  // free the game struct itself
+	}
+
+	if (player)
+	{
+		if (player->img)
+			mlx_delete_image(mlx, player->img);  // use MLX function
+		free(player);  // free the player struct itself
+	}
+
+	if (mlx)
+		mlx_terminate(mlx);  // cleanly shuts down MLX42
+}
+
+
 int find(int attrib, char *map)
 {
 	int count;
@@ -38,3 +59,46 @@ int find(int attrib, char *map)
 	else { printf("wtffff broo...") ;}
 	return (1);
 }
+
+int count(char *map, char c)
+{
+	int count;
+	int i;
+
+	i = 0;
+	count = 0;
+	while (map[i])
+	{
+		if (map[i] == c)
+			count++;
+		i++;;
+	}
+	return (count);
+}
+
+mlx_image_t *get_image(int type, mlx_t *mlx)
+{
+	mlx_texture_t *tex = NULL;
+
+	if (type == WALL)
+		tex = mlx_load_png("images/rock.png");
+	else if (type == PLAYER)
+		tex = mlx_load_png("images/spirit.png");
+	else if (type == COLLECTIBLE)
+		tex = mlx_load_png("images/skull.png");
+	else if (type == EXIT)
+		tex = mlx_load_png("images/portal.png");
+	else if (type == EMPTY)
+		tex = mlx_load_png("images/grass.png");
+
+	if (!tex)
+	{
+		printf("Failed to load texture for type %d\n", type);
+		return NULL;
+	}
+
+	mlx_image_t *img = mlx_texture_to_image(mlx, tex);
+	mlx_delete_texture(tex); // cleanup after image created
+	return img;
+}
+
