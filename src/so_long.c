@@ -12,14 +12,9 @@ int main(int argc, char *argv[])
 	if (map == NULL)
 		return (printf("invalid map name"), -1);
 	
-	print_map(map);
-
 	if (!is_valid(map))
 		return (free(map), printf("invalid map"), -1);
 	
-	printf("mapp good :)");
-
-
 	start_game(map);
 
 	//free the t_game and its contents

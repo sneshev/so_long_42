@@ -68,7 +68,6 @@ bool is_rectangular(char *map)
 		{
 			i++;
 			x++;
-			printf("map[i] = %c\n", map[i]);
 		}
 		if (find(WIDTH, map) != x)
 			return (false);

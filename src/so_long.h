@@ -22,8 +22,16 @@
 # include "../libft/libft.h"
 # include "../MLX42/include/MLX42/MLX42.h"
 
+typedef struct s_data
+{
+    t_game *game;
+    t_player *player;
+    mlx_t *mlx;
+}   t_data;
+
 typedef struct s_game
 {
+    mlx_image_t *emptyimg;
     char    **map;
     int     width;
     int     height;
@@ -33,9 +41,11 @@ typedef struct s_game
 typedef struct s_player
 {
     mlx_image_t *img;
-    int points;
-    int x;
-    int y;
+    int         points;
+    int         moves;
+    int         x;
+    int         y;
+
 }   t_player;
 
 
