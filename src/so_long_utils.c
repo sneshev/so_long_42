@@ -20,19 +20,19 @@ void cleanup(t_game *game, t_player *player, mlx_t *mlx)
 	if (game)
 	{
 		if (game->map)
-			free_arr(game->map);  // properly frees char **map
-		free(game);  // free the game struct itself
+			free_arr(game->map);
+		free(game);
 	}
 
 	if (player)
 	{
 		if (player->img)
-			mlx_delete_image(mlx, player->img);  // use MLX function
-		free(player);  // free the player struct itself
+			mlx_delete_image(mlx, player->img);
+		free(player);
 	}
 
 	if (mlx)
-		mlx_terminate(mlx);  // cleanly shuts down MLX42
+		mlx_terminate(mlx);
 }
 
 
@@ -76,29 +76,56 @@ int count(char *map, char c)
 	return (count);
 }
 
+// mlx_image_t *get_image(int type, mlx_t *mlx)
+// {
+// 	mlx_texture_t *tex = NULL;
+
+// 	if (type == WALL)
+// 		tex = mlx_load_png("images/rock.png");
+// 	else if (type == PLAYER)
+// 		tex = mlx_load_png("images/spirit.png");
+// 	else if (type == COLLECTIBLE)
+// 		tex = mlx_load_png("images/skull.png");
+// 	else if (type == EXIT)
+// 		tex = mlx_load_png("images/portal.png");
+// 	else if (type == EMPTY)
+// 		tex = mlx_load_png("images/grass.png");
+
+// 	if (!tex)
+// 	{
+// 		printf("Failed to load texture for type %d\n", type);
+// 		return NULL;
+// 	}
+
+// 	mlx_image_t *img = mlx_texture_to_image(mlx, tex);
+// 	// mlx_delete_texture(tex); // cleanup after image created
+// 	return img;
+// }
+
 mlx_image_t *get_image(int type, mlx_t *mlx)
 {
-	mlx_texture_t *tex = NULL;
+	mlx_texture_t* wall_tex;
+	mlx_texture_t* floor_tex;
+	mlx_texture_t* player_tex;
+	mlx_texture_t* exit_tex;
+	mlx_texture_t* collect_tex;
 
+	wall_tex = mlx_load_png("images/rock.png");
+	floor_tex = mlx_load_png("images/grass.png");
+	player_tex = mlx_load_png("images/spirit.png");
+	exit_tex = mlx_load_png("images/portal.png");
+	collect_tex = mlx_load_png("images/skull.png");
+	if (!mlx)
+		return (NULL);
 	if (type == WALL)
-		tex = mlx_load_png("images/rock.png");
-	else if (type == PLAYER)
-		tex = mlx_load_png("images/spirit.png");
-	else if (type == COLLECTIBLE)
-		tex = mlx_load_png("images/skull.png");
-	else if (type == EXIT)
-		tex = mlx_load_png("images/portal.png");
-	else if (type == EMPTY)
-		tex = mlx_load_png("images/grass.png");
-
-	if (!tex)
-	{
-		printf("Failed to load texture for type %d\n", type);
-		return NULL;
-	}
-
-	mlx_image_t *img = mlx_texture_to_image(mlx, tex);
-	mlx_delete_texture(tex); // cleanup after image created
-	return img;
+		return (mlx_texture_to_image(mlx, wall_tex));
+	if (type == PLAYER)
+		return (mlx_texture_to_image(mlx, player_tex));
+	if (type == COLLECTIBLE)
+		return (mlx_texture_to_image(mlx, collect_tex));
+	if (type == EXIT)
+		return (mlx_texture_to_image(mlx, exit_tex));
+	if (type == EMPTY)
+		return (mlx_texture_to_image(mlx, floor_tex));
+	return (NULL);		
 }
-

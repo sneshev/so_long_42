@@ -28,11 +28,9 @@ void start_game(char *map_raw)
 	mlx_t *mlx;
 	t_game *game;
 	t_player *player;
-	(void)game;
-	(void)player;
 
 	printf("width: %d, height: %d\n", find(WIDTH, map_raw), find(HEIGHT, map_raw));
-	if (!(mlx = mlx_init(find(WIDTH, map_raw), find(HEIGHT, map_raw), "i love mitaniiiiiiiiiiiiiiiii", false)))
+	if (!(mlx = mlx_init(find(WIDTH, map_raw) * TILE_SIZE, find(HEIGHT, map_raw) * TILE_SIZE, "i love mitaniiiiiiiiiiiiiiiii", false)))
 	{
 		// puts();
 		return ;
