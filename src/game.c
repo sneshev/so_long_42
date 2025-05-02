@@ -36,9 +36,13 @@ void move(t_game *game, t_player *player, int new_y, int new_x)
     map = game->map;
     if (map[new_y][new_x] == WALL)
         return ;
-    else if (map[new_y][new_x] == EXIT && player->points == game->points)
+    else if (map[new_y][new_x] == EXIT && player->points != game->points)
+        return ;
+    else if (map[new_y][new_x] == EXIT && player->points == game->points) // WIN GAME LESGO ... but only if all coins collected
     {
-        //WIN GAME LESGO ... but only if all coins collected
+        if (player->points != game->points)
+            return ;
+        
         return ;
     }
     
@@ -47,38 +51,37 @@ void move(t_game *game, t_player *player, int new_y, int new_x)
     map[player->y][player->x] = '0';
     map[new_y][new_x] = 'P';
     find_start(&player->y, &player->x, map);
+    mlx_image_to_window(game->mlx, get_image(EMPTY, game->mlx), player->x * TILE_SIZE, player->y * TILE_SIZE);
+    mlx_image_to_window(game->mlx, get_image(PLAYER, game->mlx), new_x * TILE_SIZE, new_y * TILE_SIZE);
     player->moves++;
-    render_map(game->mlx, game->map);
 }
 
 // int mlx_key_hook(void *win, int (*funct_ptr)(int, void *), void *param);
 void sethooks(mlx_key_data_t keydata, void *param)
 {
+    static int moves = 0;
     t_data *data;
     t_player *player;
 
     data = (t_data *)param;
     player = data->player;
     if (keydata.action != MLX_PRESS)
+        return ;
+    if (keydata.key == MLX_KEY_ESCAPE)
     {
         // mlx_loop_end();e
+        return ;
     }
     if (keydata.key == MLX_KEY_A) //left
-    {
         move(data->game, player, player->y, player->x - 1);
-    }
     if (keydata.key == MLX_KEY_D) //right
-    {
         move(data->game, player, player->y, player->x + 1);
-    }
     if (keydata.key == MLX_KEY_S) //down
-    {
         move(data->game, player, player->y + 1, player->x);
-    }
     if (keydata.key == MLX_KEY_W) //up
-    {
         move(data->game, player, player->y - 1, player->x);
-    }
+    moves++;
+    printf("moves: %d\n", moves); //need to be ft_printf()!!!
 }
 
 void start_game(char *map_raw)
