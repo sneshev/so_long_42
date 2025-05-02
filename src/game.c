@@ -29,17 +29,17 @@ void render_map(mlx_t *mlx, char **map)
 
 
 //  x is horizontal
-int move(t_game *game, t_player *player, int new_y, int new_x)
+void move(t_game *game, t_player *player, int new_y, int new_x)
 {
     char **map;
 
     map = game->map;
     if (map[new_y][new_x] == WALL)
-        return -99999;
+        return ;
     else if (map[new_y][new_x] == EXIT && player->points == game->points)
     {
         //WIN GAME LESGO ... but only if all coins collected
-        return 999999;
+        return ;
     }
     
     if (map[new_y][new_x] == COLLECTIBLE)
@@ -49,7 +49,6 @@ int move(t_game *game, t_player *player, int new_y, int new_x)
     find_start(&player->y, &player->x, map);
     player->moves++;
     render_map(game->mlx, game->map);
-    return 1;
 }
 
 // int mlx_key_hook(void *win, int (*funct_ptr)(int, void *), void *param);
@@ -74,11 +73,11 @@ void sethooks(mlx_key_data_t keydata, void *param)
     }
     if (keydata.key == MLX_KEY_S) //down
     {
-        move(data->game, player, player->y - 1, player->x);
+        move(data->game, player, player->y + 1, player->x);
     }
     if (keydata.key == MLX_KEY_W) //up
     {
-        move(data->game, player, player->y + 1, player->x);
+        move(data->game, player, player->y - 1, player->x);
     }
 }
 
