@@ -62,7 +62,7 @@ void sethooks(mlx_key_data_t keydata, void *param)
     player = data->player;
     if (keydata.action != MLX_PRESS)
     {
-        // mlx_loop_end();
+        // mlx_loop_end();e
     }
     if (keydata.key == MLX_KEY_A) //left
     {
