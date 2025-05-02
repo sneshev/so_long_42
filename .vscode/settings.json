@@ -4,6 +4,7 @@
 		"so_long.h": "c",
 		"stdio.h": "c",
 		"get_next_line.h": "c",
-		"typeinfo": "c"
+		"typeinfo": "c",
+		"system_error": "c"
 	}
 }
