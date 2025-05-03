@@ -8,10 +8,10 @@ char *find_map(char *name, int free_flag)
 	dot = ft_strrchr(name, '.');
 	if (!dot || ft_strncmp(dot, ".ber", 5))
 	{
-		temp = ft_strjoin(name, ".ber");
-		if (!temp)
-			return (NULL);
-		return (find_map(temp, 1));
+		// temp = ft_strjoin(name, ".ber");
+		// if (!temp)
+		return (NULL);
+		// return (find_map(temp, 1));
 	}
 	temp = ft_strjoin("maps/", name);
 	if (!temp)
