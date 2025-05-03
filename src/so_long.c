@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
 	
 	if (!is_valid(map))
 		return (free(map), printf("invalid map"), -1);
-	
+
 	start_game(map);
 
 	//free the t_game and its contents

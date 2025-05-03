@@ -42,7 +42,8 @@ void move(t_game *game, t_player *player, int new_y, int new_x)
     {
         if (player->points != game->points)
             return ;
-        
+        write(1, "LESGOOOoooOoOoooo", ft_strlen("LESGOOOoooOoOoooo"));
+        mlx_close_window(game->mlx);
         return ;
     }
     
@@ -89,12 +90,11 @@ void start_game(char *map_raw)
 	t_game *game;
 	t_player *player;
 
-	if (!(mlx = mlx_init(find(WIDTH, map_raw) * TILE_SIZE, find(HEIGHT, map_raw) * TILE_SIZE, "i love mitaniiiiiiiiiiiiiiiii", false)))
-	{
-		// puts();
-		return ;
-	}
-
+	if (!(mlx = mlx_init(find(WIDTH, map_raw) * TILE_SIZE, find(HEIGHT, map_raw) * TILE_SIZE, "i love mitaniiiiiiiiiiiiiiiii", true)))
+    {
+        write(2, "Failed to initialize MLX", ft_strlen("Failed to initialize MLX"));
+        return ;
+    }
 	game = setup_game(map_raw, mlx);
 	if (!game)
 		return ;
@@ -109,8 +109,10 @@ void start_game(char *map_raw)
     mlx_key_hook(mlx, &sethooks, data);
 
 	render_map(mlx, game->map);
+
 	mlx_loop(mlx);
-	cleanup(data, game, player, mlx);
+	
+    cleanup(data, game, player, mlx);
 	return ;
 }
 
