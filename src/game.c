@@ -104,14 +104,9 @@ void start_game(char *map_raw)
     data = setup_data(game, player, mlx);
 	if (!data) //still need to free prev.
 		return ;
-
-    // int input_window = mlx_new_window(mlx, 800, 600, "Key Hook Example");
     mlx_key_hook(mlx, &sethooks, data);
-
 	render_map(mlx, game->map);
-
 	mlx_loop(mlx);
-	
     cleanup(data, game, player, mlx);
 	return ;
 }
