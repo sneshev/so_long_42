@@ -15,22 +15,24 @@ void free_arr(char **arr)
 	free(arr);
 }
 
-void cleanup(t_game *game, t_player *player, mlx_t *mlx)
+void cleanup(t_data *data, t_game *game, t_player *player, mlx_t *mlx)
 {
+	if (data)
+		free(data);
 	if (game)
 	{
 		if (game->map)
 			free_arr(game->map);
+		if (game->emptyimg)
+			mlx_delete_image(mlx, game->emptyimg);
 		free(game);
 	}
-
 	if (player)
 	{
 		if (player->img)
 			mlx_delete_image(mlx, player->img);
 		free(player);
 	}
-
 	if (mlx)
 		mlx_terminate(mlx);
 }

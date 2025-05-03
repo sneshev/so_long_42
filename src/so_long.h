@@ -59,7 +59,7 @@ void        print_map2(char **map);
 
 //utils
 void        free_arr(char **arr);
-void        cleanup(t_game *game, t_player *player, mlx_t *mlx);
+void        cleanup(t_data *data, t_game *game, t_player *player, mlx_t *mlx);
 int         find(int attrib, char *map);
 int         count(char *map, char c);
 

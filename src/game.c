@@ -50,16 +50,16 @@ void move(t_game *game, t_player *player, int new_y, int new_x)
         player->points++;
     map[player->y][player->x] = '0';
     map[new_y][new_x] = 'P';
-    find_start(&player->y, &player->x, map);
     mlx_image_to_window(game->mlx, get_image(EMPTY, game->mlx), player->x * TILE_SIZE, player->y * TILE_SIZE);
     mlx_image_to_window(game->mlx, get_image(PLAYER, game->mlx), new_x * TILE_SIZE, new_y * TILE_SIZE);
     player->moves++;
+    printf("moves: %d\n", player->moves); //need to be ft_printf()!!!
+    find_start(&player->y, &player->x, map);
 }
 
 // int mlx_key_hook(void *win, int (*funct_ptr)(int, void *), void *param);
 void sethooks(mlx_key_data_t keydata, void *param)
 {
-    static int moves = 0;
     t_data *data;
     t_player *player;
 
@@ -69,7 +69,7 @@ void sethooks(mlx_key_data_t keydata, void *param)
         return ;
     if (keydata.key == MLX_KEY_ESCAPE)
     {
-        // mlx_loop_end();e
+        mlx_close_window(data->mlx);
         return ;
     }
     if (keydata.key == MLX_KEY_A) //left
@@ -80,8 +80,6 @@ void sethooks(mlx_key_data_t keydata, void *param)
         move(data->game, player, player->y + 1, player->x);
     if (keydata.key == MLX_KEY_W) //up
         move(data->game, player, player->y - 1, player->x);
-    moves++;
-    printf("moves: %d\n", moves); //need to be ft_printf()!!!
 }
 
 void start_game(char *map_raw)
@@ -112,7 +110,7 @@ void start_game(char *map_raw)
 
 	render_map(mlx, game->map);
 	mlx_loop(mlx);
-	cleanup(game, player, mlx);
+	cleanup(data, game, player, mlx);
 	return ;
 }
 
