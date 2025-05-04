@@ -90,7 +90,7 @@ void so_long(char *map_raw)
 	t_game *game;
 	t_player *player;
 
-	if (!(mlx = mlx_init(find(WIDTH, map_raw) * TILE_SIZE, find(HEIGHT, map_raw) * TILE_SIZE, "i love mitaniiiiiiiiiiiiiiiii", true)))
+	if (!(mlx = mlx_init(find(WIDTH, map_raw) * TILE_SIZE, find(HEIGHT, map_raw) * TILE_SIZE, "so_long", true)))
     {
         write(2, "Failed to initialize MLX", ft_strlen("Failed to initialize MLX"));
         return ;
