@@ -1,25 +1,25 @@
 #include "so_long.h"
 
-void find_start(int *start_x, int *start_y, char **map)
+void find_start(int *start_y, int *start_x, char **map)
 {
-	int x;
 	int y;
+	int x;
 
-	x = 0;
-	while (map[x])
+	y = 0;
+	while (map[y])
 	{
-		y = 0;
-		while (map[x][y] && map[x][y] != '\n')
+		x = 0;
+		while (map[y][x] && map[y][x] != '\n')
 		{
-			if (map[x][y] == PLAYER)
+			if (map[y][x] == PLAYER)
 			{
 				*start_x = x;
 				*start_y = y;
 				return ;
 			}
-			y++;
+			x++;
 		}
-		x++;
+		y++;
 	}
 }
 
