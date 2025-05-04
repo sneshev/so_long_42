@@ -14,10 +14,10 @@ LIBFT_REPO = git@vogsphere-v2.codam.nl:vogsphere/intra-uuid-f826522b-c274-4e1a-b
 HEADERS = -I$(MLX42_PATH)/include -I$(LIBFT_PATH)
 LIBS = $(MLX42_PATH)/build/libmlx42.a $(LIBFT_PATH)/libft.a -ldl -lglfw -pthread -lm
 
-SRCS = $(wildcard src/*.c) $(wildcard gnl/*.c)
+SRCS = $(wildcard src/*.c) $(wildcard utils/*.c)
 OBJS_DIR = obj
 OBJS = $(SRCS:src/%.c=$(OBJS_DIR)/%.o)
-OBJS := $(OBJS:gnl/%.c=$(OBJS_DIR)/%.o)
+OBJS := $(OBJS:utils/%.c=$(OBJS_DIR)/%.o)
 
 all: mlx42 libft $(NAME)
 
@@ -47,7 +47,7 @@ $(OBJS_DIR)/%.o: src/%.c
 	@mkdir -p $(OBJS_DIR)
 	$(CC) $(CFLAGS) $(HEADERS) -c $< -o $@
 
-$(OBJS_DIR)/%.o: gnl/%.c
+$(OBJS_DIR)/%.o: utils/%.c
 	@mkdir -p $(OBJS_DIR)
 	$(CC) $(CFLAGS) $(HEADERS) -c $< -o $@
 

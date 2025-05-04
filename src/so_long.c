@@ -5,7 +5,7 @@
 #define UP 2
 #define DOWN 3
 
-
+//  x is horizontal
 void render_map(mlx_t *mlx, char **map)
 {
     int x;
@@ -59,7 +59,7 @@ void move(t_game *game, t_player *player, int new_y, int new_x)
     mlx_image_to_window(game->mlx, get_image(EMPTY, game->mlx), player->x * TILE_SIZE, player->y * TILE_SIZE);
     mlx_image_to_window(game->mlx, get_image(PLAYER, game->mlx), new_x * TILE_SIZE, new_y * TILE_SIZE);
     player->moves++;
-    printf("moves: %d\n", player->moves); //need to be ft_printf()!!!
+    ft_printf("moves: %d\n", player->moves); //need to be ft_printf()!!!
     find_start(&player->y, &player->x, map);
 }
 
@@ -78,13 +78,13 @@ void sethooks(mlx_key_data_t keydata, void *param)
         mlx_close_window(data->mlx);
         return ;
     }
-    if (keydata.key == MLX_KEY_A) //left
+    if (keydata.key == MLX_KEY_A)
         move(data->game, player, player->y, player->x - 1);
-    if (keydata.key == MLX_KEY_D) //right
+    if (keydata.key == MLX_KEY_D)
         move(data->game, player, player->y, player->x + 1);
-    if (keydata.key == MLX_KEY_S) //down
+    if (keydata.key == MLX_KEY_S)
         move(data->game, player, player->y + 1, player->x);
-    if (keydata.key == MLX_KEY_W) //up
+    if (keydata.key == MLX_KEY_W)
         move(data->game, player, player->y - 1, player->x);
 }
 

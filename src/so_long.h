@@ -16,9 +16,10 @@
 # include <stdbool.h>
 # include <unistd.h>
 # include <stdlib.h>
-# include <stdio.h>
+// # include <stdio.h>
 # include <fcntl.h>
 # include "../libft/libft.h"
+# include "../utils/ft_printf.h"
 # include "../MLX42/include/MLX42/MLX42.h"
 
 

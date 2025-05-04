@@ -1,4 +1,4 @@
-# include "../gnl/get_next_line.h"
+# include "../utils/get_next_line.h"
 #include "so_long.h"
 
 char *find_map(char *name, int free_flag)
