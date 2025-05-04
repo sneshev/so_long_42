@@ -18,7 +18,6 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <fcntl.h>
-# include "../gnl/get_next_line.h"
 # include "../libft/libft.h"
 # include "../MLX42/include/MLX42/MLX42.h"
 

@@ -3,17 +3,17 @@
 int main(int argc, char *argv[])
 {
 	// int argc = 2;
-	// char *argv[2] = {"./so_long", "heart.ber"};
+	// char *argv[2] = {"./so_long", "valid2.ber"};
 	char *map;
 
 	if (argc != 2)
-		return (printf("add good args"), -1);
+		return (write(1, "Error\n", 6), -1);
 	map = getmap(argv[1]);
 	if (map == NULL)
-		return (printf("invalid map name"), -1);
+		return (write(1, "Error\n", 6), -1);
 	
 	if (!is_valid(map))
-		return (free(map), printf("invalid map"), -1);
+		return (free(map), write(1, "Error\n", 6), -1);
 
 	so_long(map);
 	free(map);
