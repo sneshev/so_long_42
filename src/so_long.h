@@ -12,11 +12,9 @@
 # define COLLECTIBLE 'C'
 # define REACHED 'X'
 
-# include <stdint.h>
 # include <stdbool.h>
 # include <unistd.h>
 # include <stdlib.h>
-// # include <stdio.h>
 # include <fcntl.h>
 # include "../libft/libft.h"
 # include "../utils/ft_printf.h"
