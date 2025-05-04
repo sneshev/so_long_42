@@ -1,9 +1,9 @@
 #include "so_long.h"
 
-int main()
+int main(int argc, char *argv[])
 {
-	int argc = 2;
-	char *argv[2] = {"./so_long", "test.ber"};
+	// int argc = 2;
+	// char *argv[2] = {"./so_long", "test.ber"};
 	char *map;
 
 	if (argc != 2)
