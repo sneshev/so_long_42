@@ -80,17 +80,17 @@ bool is_valid(char *map)
 {
 	char **marrp;
 
-	if (!only_valid(map)) //check for invalid characters
+	if (!only_valid(map))
 		return (false);
-	if (count(map, 'P') != 1 || 	//count players
-		count(map, 'E') != 1 ||		//count exits
-		count(map, 'C') < 1)		//count collectables
+	if (count(map, 'P') != 1 ||
+		count(map, 'E') != 1 ||
+		count(map, 'C') < 1)
 		return (false);
 	if (!is_rectangular(map))
 		return (false);
 
 	marrp = ft_split(map, '\n');
-	if (!map_edges(marrp, find(WIDTH, map), find(HEIGHT, map))) //check sides (ceiling, floor, left and right)
+	if (!map_edges(marrp, find(WIDTH, map), find(HEIGHT, map)))
 		return (free_arr(marrp), false);
 	if (!is_playable(marrp))
 		return (free_arr(marrp), false);
