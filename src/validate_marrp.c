@@ -25,8 +25,6 @@ void find_start(int *start_y, int *start_x, char **map)
 
 void flood_fill(int x, int y, char **map)
 {
-	// printf("x = %d, y = %d, map[x][y] = %c\n", x, y, map[x][y]);
-	// print_map2(map);
 	if (!map[x][y] || x < 0 || y < 0 || map[x][y] == REACHED)
 		return ;
 	if (map[x][y] ==  PLAYER ||	map[x][y] == EXIT ||

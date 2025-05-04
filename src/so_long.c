@@ -43,7 +43,7 @@ void move(t_game *game, t_player *player, int new_y, int new_x)
         return ;
     else if (map[new_y][new_x] == EXIT && player->points != game->points)
         return ;
-    else if (map[new_y][new_x] == EXIT && player->points == game->points) // WIN GAME LESGO ... but only if all coins collected
+    else if (map[new_y][new_x] == EXIT && player->points == game->points)
     {
         if (player->points != game->points)
             return ;

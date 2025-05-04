@@ -1,5 +1,4 @@
 #include "so_long.h"
-#include <stdlib.h>  // for malloc()
 
 t_data *setup_data(t_game *game, t_player *player, mlx_t *mlx)
 {
