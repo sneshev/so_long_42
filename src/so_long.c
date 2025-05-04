@@ -42,7 +42,7 @@ void move(t_game *game, t_player *player, int new_y, int new_x)
     {
         if (player->points != game->points)
             return ;
-        write(1, "LESGOOOoooOoOoooo", ft_strlen("LESGOOOoooOoOoooo"));
+        write(1, "You win!\n", ft_strlen("You win!\n"));
         mlx_close_window(game->mlx);
         return ;
     }
