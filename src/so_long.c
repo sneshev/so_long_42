@@ -8,13 +8,16 @@
 
 void render_map(mlx_t *mlx, char **map)
 {
-    for (int y = 0; map[y]; y++)
-    {
-        for (int x = 0; map[y][x]; x++)
-        {
-            // Always draw floor first
-            mlx_image_to_window(mlx, get_image(EMPTY, mlx), x * TILE_SIZE, y * TILE_SIZE);
+    int x;
+    int y;
 
+    y = 0;
+    while(map[y])
+    {
+        x = 0;
+        while(map[y][x])
+        {
+            mlx_image_to_window(mlx, get_image(EMPTY, mlx), x * TILE_SIZE, y * TILE_SIZE);
             if (map[y][x] == '1')
                 mlx_image_to_window(mlx, get_image(WALL, mlx), x * TILE_SIZE, y * TILE_SIZE);
             else if (map[y][x] == 'P')
@@ -23,7 +26,9 @@ void render_map(mlx_t *mlx, char **map)
                 mlx_image_to_window(mlx, get_image(EXIT, mlx), x * TILE_SIZE, y * TILE_SIZE);
             else if (map[y][x] == 'C')
                 mlx_image_to_window(mlx, get_image(COLLECTIBLE, mlx), x * TILE_SIZE, y * TILE_SIZE);
+            x++;
         }
+        y++;
     }
 }
 

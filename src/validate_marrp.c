@@ -54,10 +54,7 @@ bool	check_for_stuck(char **map)
 		while (map[x][y] && map[x][y] != '\n')
 		{
 			if (map[x][y] != '1' && map[x][y] != 'X')
-			{
-				printf("PROBLEM @ map[%d][%d]\n", x, y); fflush(NULL);
 				return (true);
-			}
 			y++;
 		}
 		x++;

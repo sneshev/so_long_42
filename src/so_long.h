@@ -72,7 +72,7 @@ bool        is_playable(char **map);
 void        find_start(int *start_x, int *start_y, char **map);
 
 //game
-int        so_long(char *map_raw);
+int         so_long(char *map_raw);
 t_data      *setup_data(t_game *game, t_player *player, mlx_t *mlx);
 t_game      *setup_game(char *map_raw, mlx_t *mlx);
 t_player    *setup_player(char **map, mlx_t *mlx);
