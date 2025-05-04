@@ -27,7 +27,7 @@ t_game *setup_game(char *map_raw, mlx_t *mlx)
     game->map = ft_split(map_raw, '\n');
 	if (game->map == NULL)
     {
-        return (NULL);
+        return (free(game), NULL);
     }
 	game->width = find(WIDTH, map_raw);
 	game->height= find(HEIGHT, map_raw);

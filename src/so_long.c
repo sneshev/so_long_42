@@ -83,7 +83,7 @@ void sethooks(mlx_key_data_t keydata, void *param)
         move(data->game, player, player->y - 1, player->x);
 }
 
-void so_long(char *map_raw)
+int so_long(char *map_raw)
 {
 	mlx_t *mlx;
     t_data *data;
@@ -93,21 +93,21 @@ void so_long(char *map_raw)
 	if (!(mlx = mlx_init(find(WIDTH, map_raw) * TILE_SIZE, find(HEIGHT, map_raw) * TILE_SIZE, "so_long", true)))
     {
         write(2, "Failed to initialize MLX", ft_strlen("Failed to initialize MLX"));
-        return ;
+        return (-1);
     }
 	game = setup_game(map_raw, mlx);
 	if (!game)
-		return ;
+		return (-1);
 	player = setup_player(game->map, mlx);
 	if (!player)
-		return ;
+        return (cleanup(NULL, game, NULL, mlx), -1);
     data = setup_data(game, player, mlx);
-	if (!data) //still need to free prev.
-		return ;
+	if (!data)
+		return (cleanup(NULL, NULL, player, mlx), -1);
     mlx_key_hook(mlx, &sethooks, data);
 	render_map(mlx, game->map);
 	mlx_loop(mlx);
     cleanup(data, game, player, mlx);
-	return ;
+    return (1);
 }
 
