@@ -6,7 +6,7 @@
 /*   By: sneshev <sneshev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 13:23:11 by sneshev           #+#    #+#             */
-/*   Updated: 2025/05/04 13:24:07 by sneshev          ###   ########.fr       */
+/*   Updated: 2025/05/04 14:18:45 by sneshev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,13 @@ void	find_start(int *start_y, int *start_x, char **map)
 	}
 }
 
-void flood_fill(int x, int y, char **map)
+void	flood_fill(int x, int y, char **map)
 {
 	if (!map[x][y] || x < 0 || y < 0 || map[x][y] == REACHED)
 		return ;
-	if (map[x][y] ==  PLAYER ||	map[x][y] == EXIT ||
-	map[x][y] == EMPTY || map[x][y] == COLLECTIBLE)
+	if (map[x][y] == PLAYER || map[x][y] == EXIT
+	|| map[x][y] == EMPTY || map[x][y] == COLLECTIBLE)
 		map[x][y] = REACHED;
-
 	if (map[x][y] == REACHED)
 	{
 		flood_fill(x + 1, y, map);
@@ -54,11 +53,11 @@ void flood_fill(int x, int y, char **map)
 
 bool	check_for_stuck(char **map)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	x = 0;
-	while(map[x])
+	while (map[x])
 	{
 		y = 0;
 		while (map[x][y] && map[x][y] != '\n')
@@ -73,10 +72,10 @@ bool	check_for_stuck(char **map)
 }
 
 //validate walking area, exit, and collectables access
-bool is_playable(char **map)
+bool	is_playable(char **map)
 {
-	int start_x;
-	int start_y;
+	int	start_x;
+	int	start_y;
 
 	find_start(&start_x, &start_y, map);
 	flood_fill(start_x, start_y, map);
