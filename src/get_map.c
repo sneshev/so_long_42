@@ -1,24 +1,17 @@
 # include "../utils/get_next_line.h"
 #include "so_long.h"
 
-char *find_map(char *name, int free_flag)
+char *find_map(char *name)
 {
 	char *dot;
 	char *temp;
 
 	dot = ft_strrchr(name, '.');
 	if (!dot || ft_strncmp(dot, ".ber", 5))
-	{
-		// temp = ft_strjoin(name, ".ber");
-		// if (!temp)
 		return (NULL);
-		// return (find_map(temp, 1));
-	}
 	temp = ft_strjoin("maps/", name);
 	if (!temp)
 		return (NULL);
-	if (free_flag)
-		free(name);
 	return (temp);
 }
 
@@ -28,7 +21,7 @@ char *getmap(char *name)
 	char *red;
 	char *map = NULL;
 
-	map = find_map(name, 0);
+	map = find_map(name);
 	fd = open(map, O_RDONLY);
 	free(map);
 	map = NULL;
