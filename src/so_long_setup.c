@@ -34,6 +34,12 @@ t_game *setup_game(char *map_raw, mlx_t *mlx)
 	game->points = count(map_raw, 'C');
     game->mlx = mlx;
     game->emptyimg = get_image(EMPTY, mlx);
+    if (!game->emptyimg)
+    {
+        free_arr(game->map);
+        free(game);
+        return (NULL);
+    }
     return (game);
 }
 
@@ -48,5 +54,7 @@ t_player *setup_player(char **map, mlx_t *mlx)
     player->moves = 0;
     find_start(&player->y, &player->x, map);
     player->img = get_image(PLAYER, mlx);
+    if (!player->img)
+        return (free(player), NULL);
     return (player);
 }

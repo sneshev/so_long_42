@@ -10,7 +10,7 @@
 # define PLAYER 'P'
 # define EXIT 'E'
 # define COLLECTIBLE 'C'
-# define REACHABLE 'X'
+# define REACHED 'X'
 
 # include <stdint.h>
 # include <stdbool.h>

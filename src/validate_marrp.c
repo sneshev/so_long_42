@@ -27,13 +27,13 @@ void flood_fill(int x, int y, char **map)
 {
 	// printf("x = %d, y = %d, map[x][y] = %c\n", x, y, map[x][y]);
 	// print_map2(map);
-	if (!map[x][y] || x < 0 || y < 0 || map[x][y] == REACHABLE)
+	if (!map[x][y] || x < 0 || y < 0 || map[x][y] == REACHED)
 		return ;
 	if (map[x][y] ==  PLAYER ||	map[x][y] == EXIT ||
 	map[x][y] == EMPTY || map[x][y] == COLLECTIBLE)
-		map[x][y] = REACHABLE;
+		map[x][y] = REACHED;
 
-	if (map[x][y] == REACHABLE)
+	if (map[x][y] == REACHED)
 	{
 		flood_fill(x + 1, y, map);
 		flood_fill(x - 1, y, map);

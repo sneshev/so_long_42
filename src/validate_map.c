@@ -51,6 +51,7 @@ bool map_edges(char **map, int width, int height)
 		return (false);
 	return (true);
 }
+
 bool is_rectangular(char *map)
 {
 	int x;

@@ -58,7 +58,8 @@ int find(int attrib, char *map)
 		}
 		return (count);
 	}
-	else { printf("wtffff broo...") ;}
+	else
+		return (0);
 	return (1);
 }
 
@@ -95,7 +96,7 @@ mlx_image_t *get_image(int type, mlx_t *mlx)
 
 	if (!tex)
 	{
-		printf("Failed to load texture for type %d\n", type);
+		ft_printf("Failed to load texture for type %d\n", type);
 		return NULL;
 	}
 
