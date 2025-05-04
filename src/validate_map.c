@@ -1,15 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   validate_map.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sneshev <sneshev@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/04 13:24:28 by sneshev           #+#    #+#             */
+/*   Updated: 2025/05/04 14:16:16 by sneshev          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
-bool only_valid(char *map)
+bool	only_valid(char *map)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (map[i])
 	{
-		if (map[i] != '0' && map[i] != '1' &&
-			map[i] != 'P' && map[i] != 'C' &&
-			map[i] != 'E' && map[i] != '\n')
+		if (map[i] != '0' && map[i] != '1'
+			&& map[i] != 'P' && map[i] != 'C'
+			&& map[i] != 'E' && map[i] != '\n')
 			return (false);
 		i++;
 	}
@@ -18,9 +30,9 @@ bool only_valid(char *map)
 	return (true);
 }
 
-bool check_wall_edge(char *map_line, int width)
+bool	check_wall_edge(char *map_line, int width)
 {
-	int j;
+	int	j;
 
 	j = 0;
 	while (j < width)
@@ -32,12 +44,11 @@ bool check_wall_edge(char *map_line, int width)
 	return (true);
 }
 
-bool map_edges(char **map, int width, int height)
+bool	map_edges(char **map, int width, int height)
 {
-	int i;
+	int	i;
 
 	i = 0;
-
 	if (!check_wall_edge(map[0], width))
 		return (false);
 	while (i++ < height - 1)
@@ -52,15 +63,15 @@ bool map_edges(char **map, int width, int height)
 	return (true);
 }
 
-bool is_rectangular(char *map)
+bool	is_rectangular(char *map)
 {
-	int x;
-	int width;
-	int map_width;
+	int	x;
+	int	width;
+	int	map_width;
 
 	x = 0;
 	map_width = find(WIDTH, map);
-	while(map[x])
+	while (map[x])
 	{
 		width = 0;
 		while (map[x] && map[x] != '\n')
@@ -76,19 +87,18 @@ bool is_rectangular(char *map)
 	return (true);
 }
 
-bool is_valid(char *map)
+bool	is_valid(char *map)
 {
-	char **marrp;
+	char	**marrp;
 
 	if (!only_valid(map))
 		return (false);
-	if (count(map, 'P') != 1 ||
-		count(map, 'E') != 1 ||
-		count(map, 'C') < 1)
+	if (count(map, 'P') != 1
+		|| count(map, 'E') != 1
+		|| count(map, 'C') < 1)
 		return (false);
 	if (!is_rectangular(map))
 		return (false);
-
 	marrp = ft_split(map, '\n');
 	if (!map_edges(marrp, find(WIDTH, map), find(HEIGHT, map)))
 		return (free_arr(marrp), false);
