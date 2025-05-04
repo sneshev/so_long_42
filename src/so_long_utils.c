@@ -1,21 +1,33 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   so_long_utils.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sneshev <sneshev@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/04 14:19:40 by sneshev           #+#    #+#             */
+/*   Updated: 2025/05/04 14:22:49 by sneshev          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
-void free_arr(char **arr)
+void	free_arr(char **arr)
 {
-	int i;
+	int	i;
 
 	if (!arr)
 		return ;
 	i = 0;
-	while(arr[i])
+	while (arr[i])
 	{
-		free (arr[i]);
+		free(arr[i]);
 		i++;
 	}
 	free(arr);
 }
 
-void cleanup(t_data *data, t_game *game, t_player *player, mlx_t *mlx)
+void	cleanup(t_data *data, t_game *game, t_player *player, mlx_t *mlx)
 {
 	if (data)
 		free(data);
@@ -37,10 +49,9 @@ void cleanup(t_data *data, t_game *game, t_player *player, mlx_t *mlx)
 		mlx_terminate(mlx);
 }
 
-
-int find(int attrib, char *map)
+int	find(int attrib, char *map)
 {
-	int count;
+	int	count;
 
 	count = 1;
 	if (attrib == WIDTH)
@@ -51,7 +62,7 @@ int find(int attrib, char *map)
 	}
 	else if (attrib == HEIGHT)
 	{
-		while(*(map++))
+		while (*(map++))
 		{
 			if (*map == '\n' && *(map + 1) && *(map + 1) != '\n')
 				count++;
@@ -63,10 +74,10 @@ int find(int attrib, char *map)
 	return (1);
 }
 
-int count(char *map, char c)
+int	count(char *map, char c)
 {
-	int count;
-	int i;
+	int	count;
+	int	i;
 
 	i = 0;
 	count = 0;
@@ -74,15 +85,17 @@ int count(char *map, char c)
 	{
 		if (map[i] == c)
 			count++;
-		i++;;
+		i++;
 	}
 	return (count);
 }
 
-mlx_image_t *get_image(int type, mlx_t *mlx)
+mlx_image_t	*get_image(int type, mlx_t *mlx)
 {
-	mlx_texture_t *tex = NULL;
+	mlx_texture_t	*tex;
+	mlx_image_t		*img;
 
+	tex = NULL;
 	if (type == WALL)
 		tex = mlx_load_png("images/rock.png");
 	else if (type == PLAYER)
@@ -93,15 +106,12 @@ mlx_image_t *get_image(int type, mlx_t *mlx)
 		tex = mlx_load_png("images/portal.png");
 	else if (type == EMPTY)
 		tex = mlx_load_png("images/grass.png");
-
 	if (!tex)
 	{
 		ft_printf("Failed to load texture for type %d\n", type);
-		return NULL;
+		return (NULL);
 	}
-
-	mlx_image_t *img = mlx_texture_to_image(mlx, tex);
+	img = mlx_texture_to_image(mlx, tex);
 	mlx_delete_texture(tex);
-	return img;
+	return (img);
 }
-
