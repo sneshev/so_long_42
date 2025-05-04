@@ -51,27 +51,26 @@ bool map_edges(char **map, int width, int height)
 		return (false);
 	return (true);
 }
-
 bool is_rectangular(char *map)
 {
-	int i;
 	int x;
-	int count = 0;
+	int width;
+	int map_width;
 
-	i = 0;
 	x = 0;
-	while(i <= find(HEIGHT, map))
+	map_width = find(WIDTH, map);
+	while(map[x])
 	{
-		x = 0;
-		count++;
-		while (map[i] && map[i] != '\n')
+		width = 0;
+		while (map[x] && map[x] != '\n')
 		{
-			i++;
 			x++;
+			width++;
 		}
-		if (find(WIDTH, map) != x)
+		if (width != map_width)
 			return (false);
-		i++;
+		if (map[x] != '\0')
+			x++;
 	}
 	return (true);
 }
