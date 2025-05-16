@@ -1,6 +1,6 @@
 NAME = so_long
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = #-Wall -Wextra -Werror -g
 
 # Library paths
 MLX42_PATH = ./MLX42
