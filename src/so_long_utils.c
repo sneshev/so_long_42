@@ -6,7 +6,7 @@
 /*   By: sneshev <sneshev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 14:19:40 by sneshev           #+#    #+#             */
-/*   Updated: 2025/05/16 20:44:24 by sneshev          ###   ########.fr       */
+/*   Updated: 2025/05/16 20:45:09 by sneshev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int	count(char *map, char c)
 	return (count);
 }
 
-mlx_image_t	*get_image(int type, mlx_t *mlx)
+mlx_image_t	*get_image2(int type, mlx_t *mlx)
 {
 	mlx_texture_t	*tex;
 	mlx_image_t		*img;
@@ -116,22 +116,22 @@ mlx_image_t	*get_image(int type, mlx_t *mlx)
 	return (img);
 }
 
-// mlx_image_t	*get_image(int type, mlx_t *mlx)
-// {
-// 	mlx_texture_t	*tex;
-// 	mlx_image_t		*img;
+mlx_image_t	*get_image(int type, mlx_t *mlx)
+{
+	mlx_texture_t	*tex;
+	mlx_image_t		*img;
 
-// 	// if (type == WALL)
-// 		// tex = mlx_load_png("images/BLACK.png");
-// 	if (type == COLLECTIBLE)
-// 		tex = mlx_load_png("images/collectable.png");
-// 	// else if (type == EMPTY)
-// 	// 	tex = mlx_load_png("images/WHITE.png");
-// 	else 
-// 		tex = mlx_load_png("images/Mitani.png");
+	// if (type == WALL)
+		// tex = mlx_load_png("images/BLACK.png");
+	if (type == COLLECTIBLE)
+		tex = mlx_load_png("images/collectable.png");
+	// else if (type == EMPTY)
+	// 	tex = mlx_load_png("images/WHITE.png");
+	else 
+		tex = mlx_load_png("images/Mitani.png");
 
-// 	img = mlx_texture_to_image(mlx, tex);
-// 	mlx_delete_texture(tex);
-// 	return (img);
-// }
+	img = mlx_texture_to_image(mlx, tex);
+	mlx_delete_texture(tex);
+	return (img);
+}
 
