@@ -6,5 +6,3 @@ how to play:
 - get all collectables and then find the exit in the shortest moves possible
 - W S A and D for movement
 - ESC for exit
-
-there are leaks from the library, not from my code
